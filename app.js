@@ -8,6 +8,29 @@
   var S = load(); S.done = S.done || {}; S.checks = S.checks || {};
   var root = document.body.getAttribute('data-root') || '';
 
+  /* Vidéo de bienvenue : fenêtre plein écran, lue avec le son à la première connexion, une seule fois */
+  function welcome(after, replay) {
+    if (!replay && S.welcomeSeen) { after(); return; }
+    var w = document.createElement('div'); w.className = 'wv'; w.setAttribute('role', 'dialog'); w.setAttribute('aria-modal', 'true'); w.setAttribute('aria-label', 'Présentation de la formation');
+    w.innerHTML = '<div class="wv-box"><video class="wv-video" playsinline controls controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture preload="auto"></video>'
+      + '<div class="wv-bar"><button type="button" class="btn ghost-d" data-wv-mute>Couper le son</button><button type="button" class="btn red" data-wv-close>' + (replay ? 'Fermer' : 'Commencer la formation') + '</button></div></div>';
+    document.body.appendChild(w); document.body.classList.add('wv-open');
+    var v = w.querySelector('video'), mb = w.querySelector('[data-wv-mute]'), cb = w.querySelector('[data-wv-close]');
+    v.src = root + 'video/intro.mp4'; v.poster = root + 'video/intro-poster.jpg';
+    v.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+    function lab() { mb.textContent = v.muted ? 'Activer le son' : 'Couper le son'; }
+    mb.addEventListener('click', function () { v.muted = !v.muted; lab(); });
+    v.addEventListener('volumechange', lab);
+    var closed = false;
+    function close() { if (closed) return; closed = true; v.pause(); if (!replay) { S.welcomeSeen = 1; save(); } w.remove(); document.body.classList.remove('wv-open'); after(); }
+    cb.addEventListener('click', close);
+    v.addEventListener('ended', function () { cb.textContent = replay ? 'Fermer' : 'Commencer la formation'; cb.focus(); });
+    w.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    var pr = v.play();
+    if (pr && pr.catch) pr.catch(function () { v.muted = true; lab(); v.play().catch(function () {}); });
+    cb.focus();
+  }
+
   /* Inscription : nom, e-mail, fonction, société (sans mot de passe) */
   var me = document.body.getAttribute('data-self') || '';
   var SAFE = /^(index|progression)\.html$|^(lecons|phases)\/[a-z0-9-]+\.html$/;
@@ -39,13 +62,11 @@
       err.textContent = '';
       v.date = new Date().toISOString();
       S.profile = v; save();
-      var go = function () { location.href = root + next; };
       if (ENDPOINT && !form.elements.site_web.value) {
         var body = new URLSearchParams(v); body.append('site', location.hostname || 'local');
-        var done = false, fin = function () { if (!done) { done = true; go(); } };
-        fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', body: body }).then(fin, fin);
-        setTimeout(fin, 2500);
-      } else go();
+        try { fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', body: body, keepalive: true }).catch(function () {}); } catch (e) {}
+      }
+      welcome(function () { location.href = root + next; });
     });
   }
   function q(sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); }
@@ -126,5 +147,12 @@
   each('[data-reset]', function (b) {
     b.addEventListener('click', function () { if (window.confirm('Effacer votre progression sur cet ordinateur ?')) { S = { done: {}, checks: {} }; save(); location.reload(); } });
   });
+  each('[data-resume-a]', function (a) {
+    a.addEventListener('click', function (e) {
+      if (S.welcomeSeen || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      e.preventDefault(); var href = a.href; welcome(function () { location.href = href; });
+    });
+  });
+  each('[data-wv-open]', function (b) { b.addEventListener('click', function () { welcome(function () {}, true); }); });
   render();
 })();
