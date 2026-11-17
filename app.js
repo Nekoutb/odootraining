@@ -47,12 +47,12 @@
     each('[data-total-done]', function (e) { e.textContent = tot; });
     each('[data-total-pct]', function (e) { e.textContent = Math.round(tot / all * 100); });
     var t = target(), L = D.lessons[t], P = phaseOf[L.phase];
-    each('[data-resume-a]', function (e) { e.href = root + L.url; if (started && e.hasAttribute('data-swap')) e.textContent = 'Reprendre'; });
+    each('[data-resume-a]', function (e) { e.href = root + L.url; if (started && e.hasAttribute('data-swap')) e.textContent = 'Continuer'; });
     each('[data-resume-phase]', function (e) { e.href = root + 'phases/' + P.slug + '.html'; e.textContent = 'Voir la phase ' + P.n; });
     each('[data-resume-ph]', function (e) { e.textContent = 'Phase ' + P.n + ' · ' + P.t + ' · leçon ' + t; });
     each('[data-resume-title]', function (e) { e.textContent = L.t; });
     if (started) {
-      each('[data-resume-k]', function (e) { e.textContent = 'Reprendre là où vous en étiez'; });
+      each('[data-resume-k]', function (e) { e.textContent = 'Votre parcours'; });
       each('[data-resume-t]', function (e) { e.innerHTML = ''; e.appendChild(document.createTextNode('Phase ' + P.n + ' · ' + P.t)); e.appendChild(document.createElement('br')); var s = document.createElement('span'); s.textContent = 'Leçon ' + t + ' · ' + L.t; e.appendChild(s); });
       each('[data-prog-lead]', function (e) { e.textContent = 'Vous êtes en phase ' + P.n + ' sur 9 : ' + P.t + '. ' + tot + ' leçon' + (tot > 1 ? 's' : '') + ' terminée' + (tot > 1 ? 's' : '') + ' sur ' + all + '.'; });
     }
