@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.3 Comptabiliser les dotations aux amortissements · Formation Odoo</title>
+<meta name="description" content="Passer chaque mois les dotations de tous les biens.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script src="../app.js" defer></script>
+</head>
+<body data-root="../">
+<a class="skip" href="#main">Aller au contenu</a>
+<header class="top"><div class="top-in">
+  <a class="brand" href="../index.html"><svg class="mark" viewBox="0 0 22 22" aria-hidden="true"><rect x="0" y="2" width="22" height="4"/><rect x="0" y="9" width="15" height="4"/><rect x="0" y="16" width="22" height="4"/></svg><span class="bname">ELITE ADVISORS</span><span class="sep"></span><span class="bt">Formation Odoo</span></a>
+  <nav class="topnav" aria-label="Navigation principale"><a href="../index.html">Accueil</a><a href="../progression.html">Ma progression</a><a href="../index.html#phases">Les 9 phases</a></nav>
+  <span class="free">Accès libre · progression gardée dans ce navigateur</span>
+</div></header>
+<main id="main"><section class="lhead"><div class="wrap lh-in">
+<a class="back" href="../phases/immobilisations.html">‹ Phase 3 · Immobilisations</a>
+<div class="lh-t"><p class="muted small">Leçon 3.3 · 20 min</p><h1 class="h1s">Comptabiliser les dotations aux amortissements</h1></div>
+<span class="badge" data-lesson-badge="3.3">À faire</span>
+</div></section>
+<div class="wrap lgrid pad">
+<nav class="lnav" aria-label="Leçons de la phase 3"><p class="kicker">Phase 3 · leçons</p><ol><li><a href="3-1.html" class="snav" data-lesson-row="3.1"><span class="lnum s" data-lesson-num="3.1">3.1</span><span>Paramétrer les profils d&#x27;immobilisation</span></a></li><li><a href="3-2.html" class="snav" data-lesson-row="3.2"><span class="lnum s" data-lesson-num="3.2">3.2</span><span>Enregistrer l&#x27;acquisition d&#x27;une immobilisation</span></a></li><li><a href="3-3.html" class="snav" data-lesson-row="3.3" aria-current="page"><span class="lnum s" data-lesson-num="3.3">3.3</span><span>Comptabiliser les dotations aux amortissements</span></a></li><li><a href="3-4.html" class="snav" data-lesson-row="3.4"><span class="lnum s" data-lesson-num="3.4">3.4</span><span>Suivre les amortissements cumulés</span></a></li><li><a href="3-5.html" class="snav" data-lesson-row="3.5"><span class="lnum s" data-lesson-num="3.5">3.5</span><span>Céder ou mettre au rebut un bien</span></a></li></ol></nav>
+<article class="lart" data-lesson="3.3">
+<p class="obj"><b>Objectif.</b> Passer chaque mois les dotations de tous les biens.</p>
+<p class="where"><span>Où dans Odoo 15</span><code>Facturation › Immobilisations › Calculer les amortissements</code></p>
+<figure class="shot"><a href="../img/p3_tableau_amortissement.webp" target="_blank" rel="noopener"><img src="../img/p3_tableau_amortissement.webp" alt="Tableau d&#x27;un bien : (1) mois déjà comptabilisé, (2) mois à comptabiliser." loading="eager" width="1366" height="768"></a><figcaption>Tableau d&#x27;un bien : (1) mois déjà comptabilisé, (2) mois à comptabiliser.</figcaption></figure><figure class="shot"><a href="../img/p3_calculer_dotations.webp" target="_blank" rel="noopener"><img src="../img/p3_calculer_dotations.webp" alt="(1) date de fin de période, (2) Calculer." loading="lazy" width="1366" height="768"></a><figcaption>(1) date de fin de période, (2) Calculer.</figcaption></figure>
+<section class="card-w" aria-labelledby="st-t"><h2 id="st-t" class="h3">Ce que vous faites</h2><ol class="steps"><li><span>Ouvrez un bien, onglet <b>Tableau des amortissements</b> : les mois comptabilisés (1) ont leur pièce, le mois en cours (2) non.</span></li><li><span>Ouvrez <b>Immobilisations › Calculer les amortissements</b>.</span></li><li><span>Date (1 sur la 2e capture) : le dernier jour du mois, par exemple 30/09/2026.</span></li><li><span>Cliquez sur <b>Calculer</b> (2) : une pièce par bien est créée au débit du 681 et au crédit du 28.</span></li></ol></section>
+<section class="card-w" aria-labelledby="ck-t"><div class="sec-h"><h2 id="ck-t" class="h3">À vérifier avant de continuer</h2><span class="muted small"><span data-check-count="3.3">0</span> / 2</span></div><ul class="checks"><li><label><input type="checkbox" data-check="3.3:0"><span>Chaque bien en cours a sa dotation du mois.</span></label></li><li><label><input type="checkbox" data-check="3.3:1"><span>Le total des dotations du mois correspond au tableau de chaque bien.</span></label></li></ul></section>
+<section class="warnbox" aria-label="À éviter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5"/><path d="M12 18h.01"/></svg><div><b>À éviter.</b><ul><li>Ne calculez pas au-delà du mois en cours.</li><li>Ne calculez pas sur une période verrouillée.</li></ul></div></section>
+<section class="card-w dashed" aria-labelledby="exo-t"><h2 id="exo-t" class="h3">Exercice sur la base de test</h2><p>Calculez les dotations au 30/09/2026 et contrôlez le camion de livraison.</p></section>
+<div class="lfoot"><button type="button" class="btn blue" data-done="3.3">Marquer la leçon comme terminée</button></div>
+<nav class="pager" aria-label="Leçon précédente et suivante"><a class="btn ghost" href="3-2.html">‹ 3.2 Enregistrer l&#x27;acquisition d&#x27;une immobilisation</a><a class="btn red" href="3-4.html">3.4 Suivre les amortissements cumulés ›</a></nav>
+</article></div></main>
+<footer class="foot"><div class="wrap">
+  <p><strong>ELITE ADVISORS</strong> · Douala, Cameroun · <a href="https://www.eliteadvisors.cm-ea.com">www.eliteadvisors.cm-ea.com</a> · contact@cm-ea.com</p>
+  <p class="muted">Captures réelles d'Odoo 15 (édition Community, application « Facturation ») sur une société fictive. Sur Odoo 15 Enterprise l'application s'appelle « Comptabilité » ; les immobilisations, les rapports, le verrouillage et la validation des écritures y ont des écrans différents (ici : modules libres OCA).</p>
+</div></footer>
+</body></html>
